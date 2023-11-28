@@ -1,8 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HousingLocation } from './housinglocation';
+import { environment } from '../environments/environment';
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getAnalytics } from "firebase/analytics";
+import { collection, getDocs } from "firebase/firestore"; 
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Initialize Firebase
+const app = initializeApp(environment.firebase);
+const analytics = getAnalytics(app);
+// Initialize Cloud Firestore and get a reference to the service
+const db = getFirestore(app);
+
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HousingService {
 
@@ -124,5 +140,16 @@ export class HousingService {
   
   submitApplication(firstName: string, lastName: string, email: string) {
     console.log(`Homes application received: firstName: ${firstName}, lastName: ${lastName}, email: ${email}.`);
+  }
+
+  async getHomesFromFirebase() {
+
+  // Initialize Cloud Firestore and get a reference to the service
+  // const db = db.firestore();
+
+  const querySnapshot = await getDocs(collection(db, "users"));
+  querySnapshot.forEach((doc) => {
+    console.log(`${doc.id} => ${doc.data()}`);
+  });
   }
 }
