@@ -148,7 +148,7 @@ export class HousingService {
     // const storage = getStorage();
 
     // Create a reference under which you want to list
-    const listRef = ref(datastore, 'files/uid');
+    const listRef = ref(datastore, 'homes');
     
     // Find all the prefixes and items.
     listAll(listRef)
