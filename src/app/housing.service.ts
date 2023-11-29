@@ -6,6 +6,7 @@ import { environment } from '../environments/environment';
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
+import { getStorage, ref, listAll } from "firebase/storage";
 import { collection, getDocs } from "firebase/firestore"; 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -15,6 +16,7 @@ const app = initializeApp(environment.firebase);
 const analytics = getAnalytics(app);
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(app);
+const datastore = getStorage(app);
 
 
 @Injectable({
@@ -143,13 +145,25 @@ export class HousingService {
   }
 
   async getHomesFromFirebase() {
+    // const storage = getStorage();
 
-  // Initialize Cloud Firestore and get a reference to the service
-  // const db = db.firestore();
-
-  const querySnapshot = await getDocs(collection(db, "users"));
-  querySnapshot.forEach((doc) => {
-    console.log(`${doc.id} => ${doc.data()}`);
-  });
+    // Create a reference under which you want to list
+    const listRef = ref(datastore, 'files/uid');
+    
+    // Find all the prefixes and items.
+    listAll(listRef)
+      .then((res) => {
+        res.prefixes.forEach((folderRef) => {
+          // All the prefixes under listRef.
+          // You may call listAll() recursively on them.
+          console.log(folderRef);
+        });
+        res.items.forEach((itemRef) => {
+          // All the items under listRef.
+          console.log(itemRef);
+        });
+      }).catch((error) => {
+        // Uh-oh, an error occurred!
+      });
   }
 }
