@@ -145,25 +145,12 @@ export class HousingService {
   }
 
   async getHomesFromFirebase() {
-    // const storage = getStorage();
-
-    // Create a reference under which you want to list
-    const listRef = ref(datastore, 'homes');
+    const db = getFirestore(app,'my-first-filestore-db');
     
-    // Find all the prefixes and items.
-    listAll(listRef)
-      .then((res) => {
-        res.prefixes.forEach((folderRef) => {
-          // All the prefixes under listRef.
-          // You may call listAll() recursively on them.
-          console.log(folderRef);
-        });
-        res.items.forEach((itemRef) => {
-          // All the items under listRef.
-          console.log(itemRef);
-        });
-      }).catch((error) => {
-        // Uh-oh, an error occurred!
-      });
+    const querySnapshot = await getDocs(collection(db, "homes"));
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+    });
   }
 }
