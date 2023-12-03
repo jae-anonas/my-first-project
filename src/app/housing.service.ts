@@ -145,7 +145,7 @@ export class HousingService {
   }
 
   async getHomesFromFirebase() {
-    const db = getFirestore(app,'my-first-filestore-db');
+    const db = getFirestore(app);
     
     const querySnapshot = await getDocs(collection(db, "homes"));
     querySnapshot.forEach((doc) => {
