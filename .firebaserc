@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "project-base-firestore-406706"
-  }
+    "default": "project-base-firestore-406706",
+    "skelet0r-prod": "project-base-firestore-406706"
+  },
+  "targets": {},
+  "etags": {}
 }

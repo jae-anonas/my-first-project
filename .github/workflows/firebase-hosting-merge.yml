@@ -15,6 +15,8 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GOLD_ACCESS_395404 }}'
+          firebaseServiceAccount: >-
+            ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PROJECT_BASE_FIRESTORE_406706
+            }}
           channelId: live
-          projectId: gold-access-395404
+          projectId: project-base-firestore-406706
