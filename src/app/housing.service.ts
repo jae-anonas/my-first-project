@@ -7,7 +7,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 import { getStorage, ref, listAll } from "firebase/storage";
-import { collection, getDocs } from "firebase/firestore"; 
+import { collection, getDocs } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -131,26 +131,29 @@ export class HousingService {
 
 
   constructor() { }
-  
+
   getAllHousingLocations(): HousingLocation[] {
     return this.housingLocationList;
   }
-  
+
   getHousingLocationById(id: number): HousingLocation | undefined {
     return this.housingLocationList.find(housingLocation => housingLocation.id === id);
   }
-  
+
   submitApplication(firstName: string, lastName: string, email: string) {
     console.log(`Homes application received: firstName: ${firstName}, lastName: ${lastName}, email: ${email}.`);
   }
 
   async getHomesFromFirebase() {
-    const db = getFirestore(app);
-    
     const querySnapshot = await getDocs(collection(db, "homes"));
+
+    let housingList: HousingLocation[] = [];
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data());
+      let dataObj: any = doc.data();
+      housingList.push(<HousingLocation>dataObj);
     });
+    console.log(housingList);
+    return housingList;
   }
 }
