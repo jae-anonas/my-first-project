@@ -29,7 +29,6 @@ export class LoginComponent {
   @Output() submitEM = new EventEmitter();
 
   loginSuccess() {
-    this._router.navigate(['/home'])
-
+    this._router.navigate(['/main/home'])
   }
 }

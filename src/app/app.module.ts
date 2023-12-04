@@ -4,7 +4,7 @@ import { RouterModule } from "@angular/router";
 import { BrowserModule } from "@angular/platform-browser";
 import { provideRouter } from "@angular/router";
 import routeConfig from './routes';
-import { DashboardComponent } from "./dashboard/dashboard.component";
+import { MainComponent } from './main/main.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from "./login-page/login-page.component";
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -17,7 +17,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
+    MainComponent,
     LoginComponent
   ],
   imports: [

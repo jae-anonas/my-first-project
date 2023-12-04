@@ -2,18 +2,18 @@ import { Routes } from "@angular/router";
 import { DetailsComponent } from "./details/details.component";
 import { HomeComponent } from "./home/home.component";
 import { LoginComponent } from "./login-page/login-page.component";
-import { DashboardComponent } from "./dashboard/dashboard.component";
+import { MainComponent } from './main/main.component';
 
 const routeConfig: Routes = [
   {
-    path: '',
-    component: DashboardComponent,
-    title: 'Dashboard',
+    path: 'main',
+    component: MainComponent,
+    title: 'Main',
     children: [
       {
         path: 'home',
         component: HomeComponent,
-        title: 'Home page'
+        title: 'Home page',
       },
       {
         path: 'details/:id',
@@ -25,8 +25,12 @@ const routeConfig: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    title: 'Home details'
+    title: 'Login'
   },
+  {
+    path: '**',
+    redirectTo: '/main/home'
+  }
 ];
 
 export default routeConfig;
